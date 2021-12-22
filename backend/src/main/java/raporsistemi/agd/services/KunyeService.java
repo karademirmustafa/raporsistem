@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import raporsistemi.agd.entities.Kunye;
+import raporsistemi.agd.exception.IdNotExistsException;
+import raporsistemi.agd.exception.IlKoduAlreadyExistsException;
+import raporsistemi.agd.exception.SehirNameAlreadyExistsException;
 import raporsistemi.agd.repositories.KunyeRepository;
 
 @Service
@@ -29,6 +32,15 @@ public class KunyeService {
 	}
 	
 	public Kunye kunyeEkle(Kunye kunye) {
+		
+		
+		if(kunyeRepository.existsBySehirName(kunye.getSehirName()))
+		{
+			throw new SehirNameAlreadyExistsException();
+		}else if (kunyeRepository.existsByIlKodu(kunye.getIlKodu())) {
+			throw new IlKoduAlreadyExistsException();
+		}
+		
 		return kunyeRepository.save(kunye);
 	}
 
@@ -37,6 +49,9 @@ public class KunyeService {
 	}
 	
 	public Kunye kunyeTekGetir(Long kunyeId) {
+		if(!kunyeRepository.existsById(kunyeId)) { 
+			throw new IdNotExistsException(kunyeId);
+		}
 		return kunyeRepository.findById(kunyeId).get();
 	}
 	

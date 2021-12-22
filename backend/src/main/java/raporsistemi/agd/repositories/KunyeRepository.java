@@ -10,4 +10,7 @@ public interface KunyeRepository extends JpaRepository<Kunye, Long> {
 
 	Kunye findBySehirName(String sehirName);
 	Kunye findByIlKodu(short ilKodu);
+	boolean existsBySehirName(String sehirName); 
+	boolean existsByIlKodu(short ilKodu);
+
 }
