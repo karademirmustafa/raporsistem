@@ -34,5 +34,22 @@ width: 500px;
     border-radius:5px;
     color:white;
     background-color: teal;
+    cursor:pointer;
     
+}
+.kunyeListesi{
+    display: flex;
+    align-items: center;
+    
+}
+
+.kunyeList{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.kunyeListItem{
+    margin-right: 20px;
+    list-style: none;
 }
