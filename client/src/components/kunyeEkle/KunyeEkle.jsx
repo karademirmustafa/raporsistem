@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./kunyeEkle.css";
-import axios from "axios";
-function KunyeEkle({ kunye }) {
-  const [newKunye, setNewKunye] = useState();
+import KunyeService from "../../services/KunyeService";
+import {useNavigate} from "react-router-dom";
+function KunyeEkle() {
   const [ilKodu, setIlKodu] = useState();
-  const [sehirName, setSehirName] = useState("");
+  const [sehirName, setSehirName] = useState();
   const [temsilciSayisi, setTemsilciSayisi] = useState();
   const [fakulteSayisi, setFakulteSayisi] = useState();
   const [yuksekokulSayisi, setYuksekokulSayisi] = useState();
@@ -12,26 +12,26 @@ function KunyeEkle({ kunye }) {
   const [bolumSayisi, setBolumSayisi] = useState();
   const [erkekOgrSayisi, setErkekOgrSayisi] = useState();
   const [toplamOgrSayisi, setToplamOgrSayisi] = useState();
-
-  const handleSubmit = async (e) => {
+  const navigate = useNavigate();
+  let kunyeService = new KunyeService();
+  const newKunye = {
+    ilKodu,
+    sehirName,
+    temsilciSayisi,
+    fakulteSayisi,
+    yuksekokulSayisi,
+    meslekYuksekOkulSayisi,
+    bolumSayisi,
+    erkekOgrSayisi,
+    toplamOgrSayisi,
+  };
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const newKunye = {
-      ilKodu,
-      sehirName,
-      temsilciSayisi,
-      fakulteSayisi,
-      yuksekokulSayisi,
-      meslekYuksekOkulSayisi,
-      bolumSayisi,
-      erkekOgrSayisi,
-      toplamOgrSayisi,
-    };
-    try {
-      const res = await axios.post("/kunye", newKunye);
-      setNewKunye([...kunye, res.data]);
-    } catch (err) {
-      console.log(err);
-    }
+    kunyeService
+      .createKunye(newKunye)
+      .then((res) => {console.log(res.data)
+      navigate("/kunye")})
+      .catch((err) => console.log(err));
   };
   return (
     <div className="kunyeEkle">
@@ -83,7 +83,7 @@ function KunyeEkle({ kunye }) {
             onChange={(e) => setToplamOgrSayisi(e.target.value)}
           />
 
-          <button class="kunyeFormButton" type="submit">
+          <button className="kunyeFormButton" type="submit">
             Ekle
           </button>
         </form>
@@ -93,3 +93,12 @@ function KunyeEkle({ kunye }) {
 }
 
 export default KunyeEkle;
+
+//   try {
+//      await axios.post("/kunye", newKunye).then(()=> {alert("Kaydedildi.")}).catch((err) => {
+//       alert(err.response.data.error);
+//     });
+
+//   } catch (err) {
+//     console.log(err);
+//   }

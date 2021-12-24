@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import "./kunye.css";
-function Kunye({kunye}) {
+import KunyeService from "../../services/KunyeService"
+// import { DataGrid } from '@material-ui/data-grid';
+function Kunye() {
+  const [kunyeler, setKunyeler] = useState([]);
  
+  useEffect(() => {
+
+    let kunyeService = new KunyeService();
+    kunyeService.getAllKunye().then(result => setKunyeler(result.data));
+  }, []);
+  
+
   return (
     <div className="kunyeListesi">
         <div className="kunye">
-      {kunye.map((kunye) => (
-        <>
-          <ul className="kunyeList">
+      {kunyeler.map((kunye) => (
+       
+          <ul key={kunye.id} className="kunyeList">
             <li className="kunyeListItem">ID : {kunye.id}</li>
             <li className="kunyeListItem">İl Kodu : {kunye.ilKodu}</li>
             <li className="kunyeListItem">Şehir Name : {kunye.sehirName}</li>
@@ -33,7 +43,7 @@ function Kunye({kunye}) {
               Toplam Öğrenci Sayısı: {kunye.toplamOgrSayisi}
             </li>
           </ul>
-        </>
+        
       ))}
       </div>
     </div>

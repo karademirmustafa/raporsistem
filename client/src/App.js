@@ -28,8 +28,8 @@ function App() {
     <Router>
       navbar
       <Routes>
-      <Route path="/" element={<App/>}/>
-     <Route index element={<Home/>}/>
+  
+     <Route index  element={<Home/>}/>
      <Route path="kunye" element={<Kunye/>}/>
      <Route path="kunyeEkle" element={<KunyeEkle/>}/>
     
