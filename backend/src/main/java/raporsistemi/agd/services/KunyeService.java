@@ -2,6 +2,8 @@ package raporsistemi.agd.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import raporsistemi.agd.entities.Kunye;
@@ -19,8 +21,8 @@ public class KunyeService {
 		this.kunyeRepository = kunyeRepository;
 	}
 	
-	public List<Kunye> kunyeHepsiGetir(){
-		return kunyeRepository.findAll();
+	public Page<Kunye> kunyeHepsiGetir(Pageable pageable){
+		return kunyeRepository.findAll(pageable);
 	} 
 	
 	public Kunye kunyeSehirGetir(String sehirName){

@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
 import KunyeService from "../../services/KunyeService";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 function Kunye() {
   const [kunyeler, setKunyeler] = useState([]);
+  const [searchParams] = useSearchParams();
+  
 
   useEffect(() => {
     let kunyeService = new KunyeService();
-    kunyeService.getAllKunye().then((result) => setKunyeler(result.data));
+    const params={};
+    for(const [key,value] of searchParams.entries())
+        params[key]=value;
+      kunyeService
+      .getAllKunye(params)
+      .then((result) => setKunyeler(result.data.content));
   }, []);
 
   return (
@@ -19,23 +26,38 @@ function Kunye() {
       <div className="kunye">
         <table className="table table-bordered table-striped">
           <thead>
-            <th>ID</th>
-            <th>İl Kodu</th>
-            <th>Şehir Name</th>
-            <th>Temsilci Sayısı</th>
-            <th>Fakülte Sayısı</th>
-            <th>Yüksekokul Sayısı</th>
-            <th>Meslek Yüksekokul Sayısı</th>
-            <th>Bölüm Sayısı</th>
-            <th>Erkek Öğrenci Sayısı</th>
-            <th>Toplam Öğrenci Sayısı</th>
+            <tr>
+              <th>ID</th>
+              <th>İl Kodu</th>
+              <th>Şehir Name</th>
+              <th>Temsilci Sayısı</th>
+              <th>Fakülte Sayısı</th>
+              <th>Yüksekokul Sayısı</th>
+              <th>Meslek Yüksekokul Sayısı</th>
+              <th>Bölüm Sayısı</th>
+              <th>Erkek Öğrenci Sayısı</th>
+              <th>Toplam Öğrenci Sayısı</th>
+              <th>Aksiyonlar</th>
+            </tr>
           </thead>
           <tbody>
             {kunyeler.map((kunye) => (
               <tr key={kunye.id} className="kunyeList">
-               <td className="kunyeListItem"> <Link to={`/kunye/${kunye.id}`} className="link">{kunye.id}</Link></td>
-             <td className="kunyeListItem"><Link to={`/kunye?ilKodu=${kunye.ilKodu}`}>{kunye.ilKodu}</Link></td>
-              <td className="kunyeListItem"> <Link to={`/kunye?sehirname=${kunye.sehirName}`}>{kunye.sehirName}</Link></td>
+                <td className="kunyeListItem">
+                  <Link to={`/kunye/${kunye.id}`} className="link">
+                    {kunye.id}
+                  </Link>
+                </td>
+                <td className="kunyeListItem">
+                  <Link to={`/kunye?ilKodu=${kunye.ilKodu}`}>
+                    {kunye.ilKodu}
+                  </Link>
+                </td>
+                <td className="kunyeListItem">
+                  <Link to={`/kunye?sehirName=${kunye.sehirName}`}>
+                    {kunye.sehirName}
+                  </Link>
+                </td>
                 <td className="kunyeListItem">{kunye.temsilciSayisi}</td>
                 <td className="kunyeListItem">{kunye.fakulteSayisi}</td>
                 <td className="kunyeListItem">{kunye.yuksekokulSayisi}</td>
@@ -45,6 +67,13 @@ function Kunye() {
                 <td className="kunyeListItem">{kunye.bolumSayisi}</td>
                 <td className="kunyeListItem">{kunye.erkekOgrSayisi}</td>
                 <td className="kunyeListItem">{kunye.toplamOgrSayisi}</td>
+                <td>
+                  <Link className="btn btn-info mb-3" to={`/kunye/${kunye.id}`}>
+                    Düzenle
+                  </Link>
+                  <Link className="btn btn-danger" to={`/kunye/${kunye.id}`}>Delete</Link>
+                </td>
+                <td></td>
               </tr>
             ))}
           </tbody>

@@ -2,6 +2,8 @@ package raporsistemi.agd.controllers;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,11 +24,13 @@ public class KunyeController {
 
 	public KunyeController(KunyeService kunyeService) {
 		this.kunyeService = kunyeService;
+		
 	}
 	
 	@GetMapping
-	public List<Kunye> kunyeGetAll(){
-		return kunyeService.kunyeHepsiGetir();
+	public Page<Kunye> kunyeGetAll(Pageable pageable){
+			return kunyeService.kunyeHepsiGetir(pageable);
+		
 	}
 	
 	@GetMapping(params = "sehirName")
@@ -37,6 +41,7 @@ public class KunyeController {
 	public Kunye kunyeIlKoduGetir(short ilKodu) { 
 		return kunyeService.kunyeIlKoduGetir(ilKodu);
 	}
+	
 	
 	@GetMapping("/{kunyeId}")
 	public Kunye kunyeIdGetir(@PathVariable Long kunyeId) {

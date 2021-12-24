@@ -2,9 +2,18 @@ import axios from "axios";
 
 export default class KunyeService{
 
-getAllKunye()  {
+getAllKunye(params)  {
 
-    return axios.get("/kunye");
+    // if(page && sort){
+    //     return axios.get(`/kunye`,{params:{page,sort}});
+    // }else if (page) {
+    //     return axios.get(`/kunye?page=${page}`)
+    // }else if(sort)
+    // return axios.get(`/kunye?sort=${sort}`)
+    // else
+    // return axios.get(`/kunye?sort=ilKodu`)
+  return axios.get(`/kunye`,{params})
+  
 }
 
 createKunye(kunye) {
@@ -17,6 +26,7 @@ getByKunyeId(kunyeId){
 getBySehirName(sehirName) {
     return axios.get("/kunye?sehirName="+sehirName);
 }
+
 }
 
 
