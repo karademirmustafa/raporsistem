@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./kunyeEkle.css";
 import KunyeService from "../../services/KunyeService";
 import { useNavigate } from "react-router-dom";
 function KunyeEkle() {
@@ -36,58 +35,67 @@ function KunyeEkle() {
       .catch((err) => console.log(err));
   };
   return (
-    <div className="kunyeEkle">
-      <div className="kunyeFormContainer">
-        <form className="kunyeForm" onSubmit={handleSubmit}>
-          <label>İl Kodu</label>
+    <div className="container">
+      <div className="card-body">
+        <form onSubmit={handleSubmit}>
+          <div className="form-group mb-2">
+          <label className="form-label ">İl Kodu</label>
           <input
             placeholder="İl Kodu Giriniz.."
             onChange={(e) => setIlKodu(e.target.value)}
+            className="form-control"
           />
-          <label>Şehir</label>
+          <label className="form-label">Şehir</label>
           <input
             placeholder="Şehir Giriniz.."
             onChange={(e) => setSehirName(e.target.value)}
+            className="form-control"
           />
-          <label>Fakülte Sayısı</label>
+          <label className="form-label">Fakülte Sayısı</label>
           <input
             placeholder="Fakülte Sayısı Giriniz.."
             onChange={(e) => setFakulteSayisi(e.target.value)}
+            className="form-control"
           />
-          <label>Temsilci Sayisi</label>
+          <label className="form-label">Temsilci Sayisi</label>
           <input
             placeholder="Temsilci sayısı Giriniz.."
             onChange={(e) => setTemsilciSayisi(e.target.value)}
+            className="form-control"
           />
-          <label>Yüksek Okul Sayısı</label>
+          <label className="form-label">Yüksek Okul Sayısı</label>
           <input
             placeholder="Yüksek Okul Sayısı Giriniz.."
             onChange={(e) => setYuksekokulSayisi(e.target.value)}
+            className="form-control"
           />
-          <label>Meslek Yüksekokul Sayısı Giriniz</label>
+          <label className="form-label">Meslek Yüksekokul Sayısı Giriniz</label>
           <input
             placeholder="Meslek Yüksekokulu Sayısı Giriniz.."
             onChange={(e) => setMeslekYuksekOkulSayisi(e.target.value)}
+            className="form-control"
           />
-          <label>Bölüm Sayısı</label>
+          <label className="form-label">Bölüm Sayısı</label>
           <input
             placeholder="Bölüm Sayısı Giriniz.."
             onChange={(e) => setBolumSayisi(e.target.value)}
+            className="form-control"
           />
-          <label>Erkek Öğrenci</label>
+          <label className="form-label">Erkek Öğrenci</label>
           <input
             placeholder="Erkek Öğrenci Sayısı Giriniz.."
             onChange={(e) => setErkekOgrSayisi(e.target.value)}
+            className="form-control"
           />
-          <label>Toplam Öğrenci</label>
+          <label className="form-label">Toplam Öğrenci</label>
           <input
             placeholder="Toplam Öğrenci Sayısı Giriniz.."
             onChange={(e) => setToplamOgrSayisi(e.target.value)}
+            className="form-control"
           />
 
-          <button className="kunyeFormButton" type="submit">
-            Ekle
-          </button>
+          <button className="btn btn-primary mt-3">Ekle</button>
+          </div>
         </form>
       </div>
     </div>

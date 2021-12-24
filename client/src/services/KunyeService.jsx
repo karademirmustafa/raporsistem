@@ -11,6 +11,12 @@ createKunye(kunye) {
     return axios.post("/kunye",kunye);
 }
 
+getByKunyeId(kunyeId){
+    return axios.get("/kunye/"+kunyeId);
+}
+getBySehirName(sehirName) {
+    return axios.get("/kunye?sehirName="+sehirName);
+}
 }
 
 

@@ -1,41 +1,19 @@
 import React from "react";
 import "./app.css";
 import Home from "./pages/home/Home";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Kunye from "./components/kunye/Kunye";
 import KunyeEkle from "./components/kunyeEkle/KunyeEkle";
-
+import KunyeDetay from "./pages/kunyeDetay/KunyeDetay";
 function App() {
-  //Tüm veriyi çağırma
-
-  //ekleme
-
-  // const handleUpdateSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const res = await axios.put("/kunye/:kunyeId")
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
   return (
-    <Router>
+    <Routes>
       navbar
-      <Routes>
-  
-     <Route index  element={<Home/>}/>
-     <Route path="kunye" element={<Kunye/>}/>
-     <Route path="kunyeEkle" element={<KunyeEkle/>}/>
-    
-      
-      </Routes>
-    </Router>
+      <Route index element={<Home />} />
+      <Route path="kunye" element={<Kunye />} />
+      <Route path="kunyeEkle" element={<KunyeEkle />} />
+      <Route path="kunye/:kunyeId" element={<KunyeDetay />} />
+    </Routes>
   );
 }
 
