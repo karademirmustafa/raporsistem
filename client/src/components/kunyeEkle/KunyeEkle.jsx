@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./kunyeEkle.css";
 import KunyeService from "../../services/KunyeService";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function KunyeEkle() {
   const [ilKodu, setIlKodu] = useState();
   const [sehirName, setSehirName] = useState();
@@ -29,8 +29,10 @@ function KunyeEkle() {
     e.preventDefault();
     kunyeService
       .createKunye(newKunye)
-      .then((res) => {console.log(res.data)
-      navigate("/kunye")})
+      .then((res) => {
+        alert(`${res.data.sehirName} şehri oluşturuldu`);
+        navigate("/kunye");
+      })
       .catch((err) => console.log(err));
   };
   return (
