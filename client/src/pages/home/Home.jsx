@@ -1,5 +1,5 @@
 import React from "react";
-import Kunye from "../../components/kunye/Kunye";
+import Kunye from "../../components/Kunye";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./home.css";
 

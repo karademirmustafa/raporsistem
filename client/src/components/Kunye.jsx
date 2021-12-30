@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import KunyeService from "../../services/KunyeService";
+import KunyeService from "../services/KunyeService";
 import { Link, useSearchParams } from "react-router-dom";
-import {useDispatch} from "react-redux";
+// import {useDispatch} from "react-redux";
+// import KunyeEkle from "./KunyeEkle"
 // import {addToKunye} from "../../store/actions/kunyeActions"
 function Kunye() {
   const [kunyeler, setKunyeler] = useState([]);
   const [searchParams] = useSearchParams();
   
-const dispatch = useDispatch();
+// const dispatch = useDispatch();
 
 // const handleAddToKunye = (kunye) => {
 //   dispatch(addToKunye(kunye));
@@ -24,6 +25,7 @@ const dispatch = useDispatch();
       .then((result) => setKunyeler(result.data.content));
 
   }, []);
+
 
   return (
     <div className="container">
