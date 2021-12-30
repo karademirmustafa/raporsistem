@@ -32,6 +32,10 @@ updateKunye(kunyeId,kunye){
 
 }
 
+deleteKunye(kunyeId){
+    return axios.delete(`/kunye/${kunyeId}`);
+}
+
 }
 
 

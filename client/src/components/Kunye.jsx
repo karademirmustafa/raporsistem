@@ -7,26 +7,37 @@ import { Link, useSearchParams } from "react-router-dom";
 function Kunye() {
   const [kunyeler, setKunyeler] = useState([]);
   const [searchParams] = useSearchParams();
-  
-// const dispatch = useDispatch();
 
-// const handleAddToKunye = (kunye) => {
-//   dispatch(addToKunye(kunye));
-//   //react toasify bildirim vs. için
-// }
-  
+  // const dispatch = useDispatch();
+
+  // const handleAddToKunye = (kunye) => {
+  //   dispatch(addToKunye(kunye));
+  //   //react toasify bildirim vs. için
+  // }
+  let kunyeService = new KunyeService();
   useEffect(() => {
-    let kunyeService = new KunyeService();
-    const params={};
-    for(const [key,value] of searchParams.entries())
-        params[key]=value;
-      kunyeService
-      .getAllKunye(params)
-      .then((result) => setKunyeler(result.data.content));
-
+    getAllKunye();
   }, []);
 
+  const getAllKunye = () => {
+    const params = {};
+    for (const [key, value] of searchParams.entries()) params[key] = value;
+    kunyeService
+      .getAllKunye(params)
+      .then((result) => setKunyeler(result.data.content));
+  };
 
+  const deleteKunye = (kunyeId,kunyeSehir) => {
+    kunyeService
+      .deleteKunye(kunyeId)
+      .then((res) => {
+        alert(`${kunyeSehir} şehrinin künyesi silinmiştir.`);
+        getAllKunye();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="container">
       <h2 className="text-center"> Künye Listesi</h2>
@@ -81,7 +92,13 @@ function Kunye() {
                   <Link className="btn btn-info mb-3" to={`/kunye/${kunye.id}`}>
                     Düzenle
                   </Link>
-                  <Link className="btn btn-danger" to={`/kunye/${kunye.id}`}>Delete</Link>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteKunye(kunye.id,kunye.sehirName)}
+                  >
+                    {" "}
+                    Delete
+                  </button>
                 </td>
                 <td></td>
               </tr>
