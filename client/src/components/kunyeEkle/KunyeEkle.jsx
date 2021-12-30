@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import KunyeService from "../../services/KunyeService";
 import { useNavigate } from "react-router-dom";
+import {useSelector } from "react-redux";
 function KunyeEkle() {
   const [ilKodu, setIlKodu] = useState();
   const [sehirName, setSehirName] = useState();
@@ -12,6 +13,11 @@ function KunyeEkle() {
   const [erkekOgrSayisi, setErkekOgrSayisi] = useState();
   const [toplamOgrSayisi, setToplamOgrSayisi] = useState();
   const navigate = useNavigate();
+
+
+
+
+  
   let kunyeService = new KunyeService();
   const newKunye = {
     ilKodu,
@@ -34,6 +40,9 @@ function KunyeEkle() {
       })
       .catch((err) => console.log(err));
   };
+
+
+  const {kunyeItems} = useSelector(state=> state.kunye);
   return (
     <div className="container">
       <div className="card-body">

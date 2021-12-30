@@ -27,6 +27,11 @@ getBySehirName(sehirName) {
     return axios.get("/kunye?sehirName="+sehirName);
 }
 
+updateKunye(kunyeId,kunye){
+    return axios.put(`/kunye/${kunyeId}`,kunye);
+
+}
+
 }
 
 

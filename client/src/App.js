@@ -13,7 +13,8 @@ function App() {
       <Route path="kunye" element={<Kunye />} />
       <Route path="kunyeEkle" element={<KunyeEkle />} />
       <Route path="kunye/:kunyeId" element={<KunyeDetay />} />
-      
+      <Route path="kunye/kunyeDuzenle/:kunyeId" element={<KunyeDetay />} />
+     
     </Routes>
   );
 }

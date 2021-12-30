@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import KunyeService from "../../services/KunyeService";
 import { Link, useSearchParams } from "react-router-dom";
-
+import {useDispatch} from "react-redux";
+// import {addToKunye} from "../../store/actions/kunyeActions"
 function Kunye() {
   const [kunyeler, setKunyeler] = useState([]);
   const [searchParams] = useSearchParams();
   
+const dispatch = useDispatch();
 
+// const handleAddToKunye = (kunye) => {
+//   dispatch(addToKunye(kunye));
+//   //react toasify bildirim vs. için
+// }
+  
   useEffect(() => {
     let kunyeService = new KunyeService();
     const params={};
@@ -15,6 +22,7 @@ function Kunye() {
       kunyeService
       .getAllKunye(params)
       .then((result) => setKunyeler(result.data.content));
+
   }, []);
 
   return (
