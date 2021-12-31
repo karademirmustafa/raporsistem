@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import KunyeService from "../services/KunyeService";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 // import {useDispatch} from "react-redux";
 // import KunyeEkle from "./KunyeEkle"
 // import {addToKunye} from "../../store/actions/kunyeActions"
@@ -8,6 +8,7 @@ function Kunye() {
   const [kunyeler, setKunyeler] = useState([]);
   const [searchParams] = useSearchParams();
 
+  const navigate=useNavigate();
   // const dispatch = useDispatch();
 
   // const handleAddToKunye = (kunye) => {
@@ -16,6 +17,7 @@ function Kunye() {
   // }
   let kunyeService = new KunyeService();
   useEffect(() => {
+    navigate("?sort=ilKodu")
     getAllKunye();
   }, []);
 
@@ -28,6 +30,7 @@ function Kunye() {
   };
 
   const deleteKunye = (kunyeId,kunyeSehir) => {
+    if(window.confirm(`${kunyeSehir}'i silmek istediğinizden emin misiniz?`)){
     kunyeService
       .deleteKunye(kunyeId)
       .then((res) => {
@@ -37,6 +40,7 @@ function Kunye() {
       .catch((err) => {
         console.log(err);
       });
+    }
   };
   return (
     <div className="container">
@@ -48,7 +52,6 @@ function Kunye() {
         <table className="table table-bordered table-striped">
           <thead>
             <tr>
-              <th>ID</th>
               <th>İl Kodu</th>
               <th>Şehir Name</th>
               <th>Temsilci Sayısı</th>
@@ -64,20 +67,12 @@ function Kunye() {
           <tbody>
             {kunyeler.map((kunye) => (
               <tr key={kunye.id} className="kunyeList">
+                
                 <td className="kunyeListItem">
-                  <Link to={`/kunye/${kunye.id}`} className="link">
-                    {kunye.id}
-                  </Link>
-                </td>
-                <td className="kunyeListItem">
-                  <Link to={`/kunye?ilKodu=${kunye.ilKodu}`}>
                     {kunye.ilKodu}
-                  </Link>
                 </td>
                 <td className="kunyeListItem">
-                  <Link to={`/kunye?sehirName=${kunye.sehirName}`}>
                     {kunye.sehirName}
-                  </Link>
                 </td>
                 <td className="kunyeListItem">{kunye.temsilciSayisi}</td>
                 <td className="kunyeListItem">{kunye.fakulteSayisi}</td>
